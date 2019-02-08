@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <script src ="p5.min.js"></script>
+  </head>
+  <body>
+    <script>
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    var r;
+    var g;
+    var b;
+    //pos = position
+    var posX1 = w/2;
+    var posY1 = h/2;
+    var posX2 = w/2;
+    var posY2 = h/2;
+      
+      function setup() {
+        //make the canvas the entire screen
+        createCanvas(w,h);
+      }
+      
+      function draw() {
+        r = random(256);
+        g = random(256);
+        b = random(256);
+        
+        //can use hexadecimal colors as well
+        //background(color(255,105,180));
+        
+        //ellipse value 1 = starting pos of X
+        //ellipse value 2 = starting pos of Y
+        //ellipse value 3 = radius of X
+        //ellipse value 4 = radius of Y
+        strokeWeight(1);
+        fill(color(r,g,b));
+        strokeWeight(1);
+        fill(color(r,g,b));
+        var randX1 = random(-50,51);
+        var randY1 = random(-50,51);
+        var randX2 = random(-50,51);
+        var randY2 = random(-50,51);
+        //posX add randX plus posY and randY and move the ellipse by itself
+        posX1 += randX1;
+        posY1 += randY1;
+        posX2 += randX2;
+        posY2 += randY2;
+        rect(posX1,posY1,random(50),random(50));
+        ellipse(posX2,posY2,random(50),random(50));
+      }
+      
+    </script>
+    
+  </body>
+</html>
