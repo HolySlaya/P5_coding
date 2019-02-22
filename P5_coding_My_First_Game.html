@@ -1,0 +1,65 @@
+<html>
+  <head>
+  <script src ="p5.min.js"></script>
+  <style>
+    body{
+      overflow: hidden;
+    }
+  </style>
+  </head>
+  <body>
+    <script>
+    //the canvas' values for width and height
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    //where our player will start
+    var posX = w/2;
+    var posY = h/2;
+    
+      function setup(){
+        //our "play area"
+        createCanvas(w,h)
+      }
+      
+      function draw() {
+        //the color of the background is white
+        background(255);
+        //the color of the player
+        fill(color('#a7d694'));
+        //the border around of the player
+        strokeWeight(1);
+        //our player's position, our player's size, and "characteristics"
+        rect(posX,posY,100,100,20);
+        
+        
+        //W key to go up
+        //if W key is being pressed down and it's less than 0 move up
+        if((keyIsDown(87)) && (posY > 0)) {
+          //-10 because the top of the screen is 0
+          posY -=10;
+        }
+        //S key to go down
+        //if S key is being pressed down and it's greater than h-100 move down
+        if((keyIsDown(83)) && (posY < h-100)) {
+          //+10 because the bottom of the screen is unknown and we subtract 100, the player's size
+          posY +=10;
+        }
+        //A key to go left
+        //if A key is being pressed down and it's less than 0 move left
+        if((keyIsDown(65)) && (posX > 0)) {
+          //-10 because the left of the screen is 0
+          posX -=10;
+        }
+        //D key to go right
+        //if D key is being pressed down and it's greater than w-100 move right
+        if((keyIsDown(68)) && (posX < w-100)) {
+          //+10 because the right of the screen is unknown and we subtract 100, the player's size
+          posX +=10;
+        }
+      }
+      
+      
+    </script>
+    
+  </body>
+</html>
