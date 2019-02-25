@@ -1,0 +1,64 @@
+<html>
+  <head>
+  <script src ="p5.min.js"></script>
+    <style>
+    body{
+      overflow: hidden;
+    }
+  </style>
+  </head>
+  <body>
+    <h1 id="xval"></h1>
+    <h1 id="yval"></h1>
+    <script>
+    
+      var w = window.innerWidth;
+      var h = window.innerHeight;
+      //use NEW not special
+      //this is a NEW global object
+      var ball = new ball();
+      document.getElementById('xval').innerHTML = ball.x;
+      document.getElementById('yval').innerHTML = ball.y
+      
+      function setup(){
+        createCanvas(w,h);
+      }
+      
+      function draw() {
+        background(255);
+        ball.show();
+        ball.move();
+      }
+      
+      function ball() {
+        this.x = 100;
+        this.y = 100;
+        this.show = function(){
+          fill(color('red'));
+          ellipse(this.x,this.y,100,100);
+        };
+        
+        this.move = function() {
+          //right arrow to move right
+          if(keyIsDown(39)) {
+            this.x += 10;
+          }
+          //left arrow key to move left
+          if(keyIsDown(37)) {
+            this.x -= 10;
+          }
+          //up arrow key to move up
+          if(keyIsDown(38)) {
+            this.y -= 10;
+          }
+          //down arrow key to move down
+          if(keyIsDown(40)) {
+            this.y += 10;
+          }
+        }
+      }
+      
+      
+    </script>
+  </body>
+</html>
