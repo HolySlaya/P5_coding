@@ -1,0 +1,123 @@
+<html>
+  <head>
+  <script src ="p5.min.js"></script>
+    <style>
+    body{
+      overflow: hidden;
+    }
+  </style>
+  </head>
+  <body>
+    <h1 id="xval"></h1>
+    <h1 id="yval"></h1>
+    <script>
+    
+      var w = window.innerWidth;
+      var h = window.innerHeight;
+      /*use NEW not special or substitute word
+      and when making multiple objects with the same name do
+      var object = new goodguy1();
+      
+        make a new object and call it's var goodguy*/
+      var goodguy = new goodguy();
+      // make a new object and call it's var badguy
+      var badguy = new badguy();
+      var d;
+      
+      document.getElementById('xval').innerHTML = ball.x;
+      document.getElementById('yval').innerHTML = ball.y;
+      
+      function setup(){
+        createCanvas(w,h);
+      }
+      
+      function draw() {
+        background(255);
+        //show goodguy
+        goodguy.show();
+        //have goodguy move
+        goodguy.move();
+        //show the badguy
+        badguy.show();
+        //have badguy move
+        badguy.move();
+        badguy.kill();
+        
+      }
+      
+      function goodguy() {
+        //coordinates of spawn
+        this.x = 100;
+        this.y = 100;
+        this.show = function(){
+          //color of goodguy
+          fill(color('blue'));
+          //goodguy's spawn and size
+          ellipse(this.x,this.y,50,50);
+        };
+        
+        this.move = function() {
+          //W Key to move up and keep the goodguy within bounds
+          if((keyIsDown(87)) && (this.y > 100)) {
+            this.y -= 10;
+          }
+          //S Key to move down and keep the goodguy within bounds
+          if((keyIsDown(83)) && (this.y < h-100)) {
+            this.y += 10;
+          }
+          //A Key to move left and keep the goodguy within bounds
+          if((keyIsDown(65)) && (this.x > 100)) {
+            this.x -= 10;
+          }
+          //D Key to move right and keep the goodguy within bounds
+          if((keyIsDown(68)) && (this.x < w-100)) {
+            this.x += 10;
+          }
+        }
+      }
+      
+          function badguy(){
+          //coordinates of spawn
+          this.x = 500;
+          this.y = 500;
+          this.show = function() {
+            //color of badguy
+            fill(color('red'));
+            //position of spawn and size
+            ellipse(this.x,this.y,50,50)
+          };
+          
+            this.move = function() {
+            //I Key to move up and keep the badguy within bounds
+            if((keyIsDown(73)) && (this.y > 100)) {
+            this.y -= 10;
+            }
+            //K Key to move down and keep the badguy within bounds
+            if((keyIsDown(75)) && (this.y < h-100)) {
+            this.y += 10;
+            }
+            //J Key to move left and keep the badguy within bounds
+            if((keyIsDown(74)) && (this.x > 100)) {
+              this.x -= 10;
+            }
+            //L Key to move right and keep the badguy within bounds
+            if((keyIsDown(76)) && (this.x < w-100)) {
+            this.x += 10;
+            }
+          }
+          this.kill = function() {
+            //take the position of this object and the position of goodguy and determine the distance
+            d = dist(this.x,this.y,goodguy.x,goodguy.y);
+            // if the distance is less than 40px DIE
+            if (d < 50) {
+              // this is the "death" it means STOP DRAWING
+              noLoop();
+              // says you lost, man
+              window.alert("You lost");
+            }
+          }
+        }
+      
+    </script>
+  </body>
+</html>
