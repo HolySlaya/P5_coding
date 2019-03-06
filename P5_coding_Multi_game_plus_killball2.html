@@ -1,0 +1,187 @@
+<html>
+  <head>
+  <script src ="p5.min.js"></script>
+    <style>
+    body{
+      margin:0;
+      padding:0;
+      overflow: hidden;
+      color:black;
+    }
+    
+    p {
+      color:white;
+      position:fixed;
+    }
+  </style>
+  </head>
+  <body>
+    <h1 id="xval"></h1>
+    <h1 id="yval"></h1>
+    <p>Instructions!! 5 seconds to read. Red Ball is the Bad Guy and his job is to tag the Blue Ball(The Good Guy). If the blue ball lasts 20 seconds, he wins! However, the Bad Guy can die if he touches the black ball!</p>
+    <script>
+      let timer = 25
+      var w = window.innerWidth;
+      var h = window.innerHeight;
+      /*use NEW not special or substitute word
+      and when making multiple objects with the same name do
+      var object = new goodguy1();
+      
+        make a new object and call it's var goodguy*/
+      var goodguy = new goodguy();
+      // make a new object and call it's var badguy
+
+      var badguy = new badguy();
+      //d = distance
+      var d;
+      // make a new object and call it's var kill ball
+      var killball = new killball();
+      var gmi;
+
+      function setup(){
+        createCanvas(w,h);
+         gmi = loadImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfTKgJfs-Nmno82RLwW6_PrIOP_2hIgRl-X0-BSCFdbMH99_s7');
+      }
+      
+      function draw() {
+        background(gmi);
+        //have the timer in the middle of the screen
+        textAlign(CENTER, CENTER);
+        //make the timer 20px
+        textSize(20);
+        //display the word timer in the middle of the screen
+        text(timer, width/2, height/2);
+        // % this is the Modulo operator, it divides then keeps the remainder
+        //so if the frameCount is divisible by 60 then one second has passed and will stop at 0
+        if (frameCount % 60 == 0 && timer > 0) {
+          timer--;
+        }
+        // Once the timer reaches 0, text appears saying Game Over, Blue wins! and display it a little below the screen.
+        if (timer == 0) {
+          text("Game Over, Blue wins!", width/2, height*0.7);
+          //stop drawing
+          noLoop();
+        }
+        //show goodguy
+        goodguy.show();
+        //have goodguy move
+        goodguy.move();
+        //show the badguy
+        badguy.show();
+        //have badguy move
+        badguy.move();
+        //have the badguy's kill function in the draw function so he can die
+        badguy.kill();
+        killball.show();
+        killball.move();
+        killball.kill();
+        
+      }
+      
+      function goodguy() {
+        //coordinates of spawn
+        this.x = 100;
+        this.y = 100;
+        this.show = function(){
+          //color of goodguy
+          fill(color('blue'));
+          //goodguy's spawn and size
+          ellipse(this.x,this.y,50,50);
+        };
+        
+        this.move = function() {
+          //W Key to move up and keep the goodguy within bounds
+          if((keyIsDown(87)) && (this.y > 100)) {
+            this.y -= 10;
+          }
+          //S Key to move down and keep the goodguy within bounds
+          if((keyIsDown(83)) && (this.y < h-100)) {
+            this.y += 10;
+          }
+          //A Key to move left and keep the goodguy within bounds
+          if((keyIsDown(65)) && (this.x > 100)) {
+            this.x -= 10;
+          }
+          //D Key to move right and keep the goodguy within bounds
+          if((keyIsDown(68)) && (this.x < w-100)) {
+            this.x += 10;
+          }
+        }
+      }
+      
+          function badguy(){
+          //coordinates of spawn
+          this.x = 500;
+          this.y = 500;
+          this.show = function() {
+            //color of badguy
+            fill(color('red'));
+            //position of spawn and size
+            ellipse(this.x,this.y,50,50)
+          };
+          
+            this.move = function() {
+            //I Key to move up and keep the badguy within bounds
+            if((keyIsDown(73)) && (this.y > 100)) {
+            this.y -= 10;
+            }
+            //K Key to move down and keep the badguy within bounds
+            if((keyIsDown(75)) && (this.y < h-100)) {
+            this.y += 10;
+            }
+            //J Key to move left and keep the badguy within bounds
+            if((keyIsDown(74)) && (this.x > 100)) {
+              this.x -= 10;
+            }
+            //L Key to move right and keep the badguy within bounds
+            if((keyIsDown(76)) && (this.x < w-100)) {
+            this.x += 10;
+            }
+          }
+          this.kill = function() {
+            //take the position of this object and the position of goodguy and determine the distance
+            d = dist(this.x,this.y,goodguy.x,goodguy.y);
+            // if the distance is less than 50px DIE
+            if (d < 50) {
+              // this is the "death" it means STOP DRAWING
+              noLoop();
+              // says you lost, man
+              window.alert("Game Over, Red wins!");
+            }
+          }
+        }
+        function killball() {
+          this.x = w/2;
+          this.y = h/2;
+          r = 50;
+          xspeed = 9;
+          yspeed = 9;
+          this.show = function() {
+            fill(color('black'));
+            ellipse(this.x,this.y,r,r);
+          }
+          this.move = function() {
+            this.x += xspeed;
+            this.y += yspeed;
+            if (this.x > w - r || this.x < r) {
+            xspeed = -xspeed;
+            }
+            if (this.y > h - r || this.y < r) {
+            yspeed = -yspeed;
+            }
+          }
+          this.kill = function() {
+            d = dist(this.x,this.y,badguy.x,badguy.y);
+            // if the distance is less than 50px DIE
+            if (d < 50) {
+              // this is the "death" it means STOP DRAWING
+              noLoop();
+              // says you lost, man
+              window.alert("Game Over");
+            }
+        }
+      }
+      
+    </script>
+  </body>
+</html>
