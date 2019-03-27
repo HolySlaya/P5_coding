@@ -1,0 +1,76 @@
+<html>
+  <head>
+      <script src ="p5.min.js"></script>
+      <style>
+        body {
+          overflow:hidden;
+        }
+      </style>
+  </head>
+  <body>
+    
+    
+    <script>
+    var x = window.innerWidth;
+    var y = window.innerHeight;
+    var jumper = new jumper();
+    
+      function setup() {
+        createCanvas(x,y);
+      }
+      
+      function draw() {
+        background(0);
+        jumper.show();
+        jumper.update();
+      }
+      
+      function jumper() {
+        this.x = 50;
+        this.y = 0;
+        //The force of gravity
+        this.gravity = 0.5;
+        //the opposing force of gravity
+        this.lift = -10;
+        //velocity of the player
+        this.velocity = 0;
+        
+        this.show = function(){
+          fill(color('red'));
+          ellipse(this.x,this.y,50,50);
+        }
+        
+        this.up = function(){
+          //function to jump
+          this.velocity += this.lift;
+        }
+        
+        this.update = function(){
+          //gravity applied when not jumping
+          this.velocity += this.gravity;
+          //height changes due your velocity increasing
+          this.y += this.velocity;
+          //air resistance
+          this.velocity *= 0.8;
+          //jumper hits the floor
+          if(this.y > y) {
+            this.y = y;
+            this.velocity = 0;
+          }
+          //jumper hits the ceiling
+          if(this.y < 0) {
+            this.y = 0;
+            this.velocity = 0;
+          }
+        }
+      }//object ends here
+      
+      function keyPressed() {
+        if(keyCode === 32) {
+          jumper.up();
+        }
+      }
+      
+    </script>
+  </body>
+</html>
