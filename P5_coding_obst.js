@@ -5,28 +5,47 @@
     this.velocity = 0;
     
     this.show = function() {
+      //make the obstacle blue
       fill(color('blue'));
+      //make it a rectangle starting at the the told positions and make it 50 by 100 pixels
       rect(this.x,this.y,50,100);
     };
     
     this.update = function() {
+      //velocity incrases as gravity increases
       this.velocity += this.gravity;
+      //the position of the box subtracts because of the velocity
       this.x -= this.velocity;
+      //take the velocity and times it by 0.8
       this.velocity *= 0.8;
       
+      //obstacle hits jumper
       hit = collideRectRect(this.x,this.y,50,100,jumper.x,jumper.y,50,50);
+      //both obstacles hit each other
+      res = collideRectRect(this.x,this.y,50,100,obst2.x,obst2.y,50,100);
       
-        if (hit == true) {
+      //if the obstacle hits the jumper stop
+        if (hit === true) {
           noLoop();
         }
+        
+        //if both obstacles hit each other send the first obstacle back to the start
+        if (res === true) {
+          this.x = w+50;
+        }
       
+      //if the obstacles passes the left side of the screen plus the size of the obstacle then
       if (this.x < -50) {
+        //send it back to the right side of the screen plus the size of the obstacle
         this.x = w+50;
+        //then randomize it's height
         this.y = Math.floor(Math.random()*h);
+        //reset the velocity of the obstacle
         this.velocity = 0;
+        //increase gravity each time this happens
         this.gravity += 0.25;
+        //add one to the score
         s += 1;
       }
     };
   }//object ends here
-      

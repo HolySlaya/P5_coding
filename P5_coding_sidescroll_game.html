@@ -4,6 +4,7 @@
       <script src ="p5.collide2d.min.js"></script>
       <script src="P5_coding_jumper.js"></script>
       <script src="P5_coding_obst.js"></script>
+      <script src="P5_coding_obst2.js"></script>
       <style>
         body{
       margin:0;
@@ -19,8 +20,10 @@
     var w = window.innerWidth;
     var h = window.innerHeight;
     var hit = false;
+    var res = false;
     var jumper = new jumper();
     var obst = new obst();
+    var obst2 = new obst2();
     var s = 0;
     
       function setup() {
@@ -35,6 +38,8 @@
         jumper.update();
         obst.show();
         obst.update();
+        obst2.show();
+        obst2.update();
       }
       
       function keyPressed() {
