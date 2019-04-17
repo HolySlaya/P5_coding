@@ -2,15 +2,14 @@ function jumper() {
         this.x = 50;
         this.y = 0;
         //The force of gravity
-        this.gravity = 0.5;
+        this.gravity = 0.75;
         //the opposing force of gravity
-        this.lift = -15;
+        this.lift = -25;
         //velocity of the player
         this.velocity = 0;
         
         this.show = function(){
-          fill(color('red'));
-          rect(this.x,this.y,50,50);
+          image(mc,this.x,this.y,70,100);
         };
         
         this.up = function(){
@@ -25,9 +24,10 @@ function jumper() {
           this.y += this.velocity;
           //air resistance
           this.velocity *= 0.8;
+
           //jumper hits the floor
-          if(this.y > h-50) {
-            this.y = h-50;
+          if(this.y > h-100) {
+            this.y = h-100;
             this.velocity = 0;
           }
           //jumper hits the ceiling

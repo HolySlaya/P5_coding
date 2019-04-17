@@ -5,10 +5,7 @@
     this.velocity = 0;
     
     this.show = function() {
-      //make the obstacle blue
-      fill(color('blue'));
-      //make it a rectangle starting at the the told positions and make it 50 by 100 pixels
-      rect(this.x,this.y,50,100);
+      image(bg,this.x,this.y,127,100)
     };
     
     this.update = function() {
@@ -20,18 +17,18 @@
       this.velocity *= 0.8;
       
       //obstacle hits jumper
-      hit = collideRectRect(this.x,this.y,50,100,jumper.x,jumper.y,50,50);
+      hit = collideRectRect(this.x,this.y,127,100,jumper.x,jumper.y,70,100);
       //both obstacles hit each other
-      res = collideRectRect(this.x,this.y,50,100,obst2.x,obst2.y,50,100);
+      res = collideRectRect(this.x,this.y,127,100,obst2.x,obst2.y,127,100);
       
-      //if the obstacle hits the jumper stop
+        //if the obstacle hits the jumper stop
         if (hit === true) {
           noLoop();
         }
         
         //if both obstacles hit each other send the first obstacle back to the start
         if (res === true) {
-          this.x = w+50;
+          this.x = w;
         }
       
       //if the obstacles passes the left side of the screen plus the size of the obstacle then

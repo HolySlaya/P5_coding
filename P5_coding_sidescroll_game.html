@@ -10,11 +10,13 @@
       margin:0;
       padding:0;
       overflow: hidden;
+      color:blue;
     }
+
       </style>
+      
   </head>
   <body>
-    
     
     <script>
     var w = window.innerWidth;
@@ -25,15 +27,26 @@
     var obst = new obst();
     var obst2 = new obst2();
     var s = 0;
+    let i = 'Space to jump, Shift to plummet, Last as long as you can! Q is to restart.'
+    var gmi;
+    var mc;
+    var bg;
+    var bg2;
     
       function setup() {
+        gmi = loadImage('background_art.png');
+        mc = loadImage('main_character.png');
+        bg = loadImage('badguy_1.png');
+        bg2 = loadImage('badguy_2.png');
         createCanvas(w,h);
       }
       
       function draw() {
-        background(0);
-        textSize(50);
-        text('Score: ' + s,10,50);
+        clear();
+        background(gmi);
+        textSize(25);
+        text('Score: ' + s,35,35);
+        text(i, 10,60)
         jumper.show();
         jumper.update();
         obst.show();
@@ -45,6 +58,10 @@
       function keyPressed() {
         if(keyCode === 32) {
           jumper.up();
+        }
+        //press Q
+        if(keyCode === 81) {
+          location.reload();
         }
       }
       

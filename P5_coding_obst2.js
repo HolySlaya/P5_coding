@@ -5,8 +5,7 @@
     this.velocity = 0;
     
     this.show = function() {
-      fill(color('blue'));
-      rect(this.x,this.y,50,100);
+      image(bg2,this.x,this.y,127,100)
     };
     
     this.update = function() {
@@ -14,7 +13,7 @@
       this.x -= this.velocity;
       this.velocity *= 0.8;
       
-      hit = collideRectRect(this.x,this.y,50,100,jumper.x,jumper.y,50,50);
+      hit = collideRectRect(this.x,this.y,127,100,jumper.x,jumper.y,70,100);
       
         if (hit === true) {
           noLoop();
